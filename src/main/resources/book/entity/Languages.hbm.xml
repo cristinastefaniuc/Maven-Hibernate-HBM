@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="book.entity.Languages" table="languages" catalog="book_store_db" optimistic-lock="version">
+        <id name="code" type="string">
+            <column name="Code" length="2" />
+            <generator class="assigned" />
+        </id>
+        
+        <property name="name" type="string">
+            <column name="Name" length="20" not-null="true" />
+        </property>
+        
+        <set name="books" table="book_lang" inverse="true" lazy = "false" fetch = "select">
+            <key column="lang_code"/>
+            <many-to-many column="book_id" class="book.entity.Languages" />
+        </set>
+    </class>
+</hibernate-mapping>

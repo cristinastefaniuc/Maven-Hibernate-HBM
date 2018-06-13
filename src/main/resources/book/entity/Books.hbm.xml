@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="book.entity.Books" table="books" catalog="book_store_db" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        
+        <many-to-one name="authors" class="book.entity.Authors" fetch="select">
+            <column name="AuthorID" not-null="true" />
+        </many-to-one>
+        
+        <property name="title" type="string">
+            <column name="Title" length="100" not-null="true" />
+        </property>
+        
+        <property name="year" type="string">
+            <column name="Year" length="4" not-null="true" />
+        </property>
+        
+        <property name="genre" column="genre">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">book.entity.Genres</param>
+                <!--<param name="useNamed">true</param>-->
+                <param name="type">12</param>
+            </type>
+        </property>
+        
+        <set name="languages" table="book_lang" cascade="save-update" lazy = "false" fetch = "select">
+            <key column="book_id"/>
+            <many-to-many column="lang_code" class="book.entity.Languages" />
+        </set>
+    </class>
+</hibernate-mapping>
