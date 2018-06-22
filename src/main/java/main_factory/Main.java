@@ -96,7 +96,7 @@ public class Main {
         bookDAO.updateBook(b2);
         
         String author = "Remarque";
-        List booksList = Factory.getInstance().getBookDAO().getBooksByAuthor(author);
+        List booksList = bookDAO.getBooksByAuthor(author);
         Iterator iterator = booksList.iterator();
         System.out.println();
         System.out.println("Books written by " + author);
@@ -108,7 +108,7 @@ public class Main {
         }
         
         String title = "Arch of Triumph";
-        Books bookByTitle = Factory.getInstance().getBookDAO().getBookByTitle(title);
+        Books bookByTitle = bookDAO.getBookByTitle(title);
         System.out.println();
         System.out.println("Title: " + title);
         System.out.println("Found:");
@@ -116,7 +116,7 @@ public class Main {
         System.out.println("Title : " + bookByTitle.getTitle() + "  Year : " + bookByTitle.getYear());
           
         String year = "1934";
-        List booksByYear = Factory.getInstance().getBookDAO().getBooksByYear(year);
+        List booksByYear = bookDAO.getBooksByYear(year);
         Iterator iterator2 = booksByYear.iterator();
         System.out.println();
         System.out.println("Year: " + year);
@@ -129,10 +129,10 @@ public class Main {
             for (Languages lang : booksLang) {
                 System.out.println("Languages : " + lang.getName());
             }  
+        }
           
         bookDAO.deleteBook(bookDAO.getBookByID(30));
         
         languageDAO.deleteLanguage(languageDAO.getLanguageByID("ru")); 
-        }
     }
 }
